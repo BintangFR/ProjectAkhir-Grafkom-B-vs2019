@@ -25,7 +25,12 @@ public:
 	Object3D cube4;
 	Object3D cube4up;
 	Object3D cube5;
-	Object3D cube6;
+	Object3D cube6d;
+	Object3D cube6b;
+	Object3D cube6kr;
+	Object3D cube6kn;
+	Object3D cube7;
+	Object3D cube7d;
 	Object3D cube3up;
 	Object3D plane;
 private:
@@ -63,7 +68,12 @@ private:
 	void BuildCube4();
 	void BuildCube4up();
 	void BuildCube5();
-	void BuildCube6();
+	void BuildCube6d();
+	void BuildCube6b();
+	void BuildCube6kr();
+	void BuildCube6kn();
+	void BuildCube7();
+	void BuildCube7d();
 	// Build Light
 	void BuildLight();
 };

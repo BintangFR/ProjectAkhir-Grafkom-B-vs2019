@@ -108,5 +108,23 @@
     <Image Include="magazinerack.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ac depan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lainnya ac.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tembok_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tembok_d.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tembok_kr.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="tembok_kn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

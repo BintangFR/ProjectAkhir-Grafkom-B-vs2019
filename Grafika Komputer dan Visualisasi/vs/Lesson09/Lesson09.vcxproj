@@ -143,15 +143,21 @@
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ac depan.png" />
     <Image Include="crate.png" />
     <Image Include="D:\FILE KHUSUS KULIAH COK!\Sems 5\Grafika Komputer\TA\asset\rak_beta.png" />
     <Image Include="Floor.png" />
     <Image Include="Kasir.png" />
     <Image Include="Kulkas.png" />
     <Image Include="Kulkasside.png" />
+    <Image Include="lainnya ac.png" />
     <Image Include="magazinerack.png" />
     <Image Include="Rakup.png" />
     <Image Include="rak_beta.png" />
+    <Image Include="tembok_b.png" />
+    <Image Include="tembok_d.png" />
+    <Image Include="tembok_kn.png" />
+    <Image Include="tembok_kr.png" />
     <Image Include="wood.png" />
   </ItemGroup>
   <ItemGroup>
