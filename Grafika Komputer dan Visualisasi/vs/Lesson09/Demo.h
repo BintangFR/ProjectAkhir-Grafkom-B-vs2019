@@ -39,7 +39,7 @@ private:
 	virtual void DeInit();
 	virtual void Update(double deltaTime);
 	virtual void Render();
-	virtual void ProcessInput(GLFWwindow *window);
+	virtual void ProcessInput(GLFWwindow* window);
 	void BuildObject(float* _vertices, size_t verticesSize, unsigned int* _indices, size_t indicesSize);
 	void BuildTexturedPlane();
 	void DrawTexturedCube(GLuint shader);
@@ -48,6 +48,9 @@ private:
 	void BuildShaders();
 	void ApplyTexture(const char* _texturePath);
 	void BuildObject();
+	void CursorMovement();
+	//Build Camera
+	void BuildCamera();
 	// Build Plane
 	void BuildPlane();
 	//Build Cube

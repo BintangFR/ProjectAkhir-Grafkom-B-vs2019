@@ -26,6 +26,7 @@ void Demo::Init() {
 	plane = Object3D();
 	BuildShaders();
 	BuildDepthMap();
+	BuildCamera();
 	BuildCube();
 	BuildCube2();
 	BuildCubeup();
@@ -60,13 +61,48 @@ void Demo::DeInit() {
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void Demo::ProcessInput(GLFWwindow *window) {
+void Demo::ProcessInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }
 
 void Demo::Update(double deltaTime) {
+
+	// zoom camera
+	// -----------
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) { // Zoom in
+		if (camera.fovy < 90) {
+			camera.Zoom(0.001f);
+		}
+	}
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) { // Zoom out
+		if (camera.fovy > 0) {
+			camera.Zoom(-0.001f);
+		}
+	}
+
+
+	// Move Camera
+	// Move Forward n Backward
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) { // Forward
+		camera.MoveForward(0.001f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) { // Backward
+		camera.MoveForward(-0.001f);
+	}
+
+	// Move Right n Left
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) { // Left
+		camera.MoveBeside(-0.001f);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) { // Right
+		camera.MoveBeside(0.001f);
+	}
+
+	CursorMovement();
 }
 
 void Demo::Render() {
@@ -126,14 +162,45 @@ void Demo::Render() {
 
 }
 
+void Demo::CursorMovement() {
+	// update camera rotation
+	// ----------------------
+	double mouseX, mouseY;
+	double midX = screenWidth / 2;
+	double midY = screenHeight / 2;
+	float angleY = 0.0f;
+	float angleZ = 0.0f;
+
+	// Get mouse position
+	glfwGetCursorPos(window, &mouseX, &mouseY);
+	if ((mouseX == midX) && (mouseY == midY)) {
+		return;
+	}
+
+	// Set mouse position
+	glfwSetCursorPos(window, midX, midY);
+
+	// Get the direction from the mouse cursor, set a resonable maneuvering speed
+	angleY = (float)((midX - mouseX)) / 1000;
+	angleZ = (float)((midY - mouseY)) / 1000;
+
+	// The higher the value is the faster the camera looks around.
+	camera.camDir.y += angleZ * 50;
+
+	// limit the rotation around the x-axis
+	if ((camera.camDir.y - camera.transform.position.y) > 25) {
+		camera.camDir.y = camera.transform.position.y + 25;
+	}
+	if ((camera.camDir.y - camera.transform.position.y) < -30) {
+		camera.camDir.y = camera.transform.position.y - 30;
+	}
+
+	camera.RotateCamera(-angleY);
+}
+
 void Demo::BuildObject() {
 	// Render Camera
 	camera.RenderCamera(this->screenWidth, this->screenHeight);
-	camera.SetCameraPos(glm::vec3(0, 5, 2));
-	camera.SetCameraFront(glm::vec3(0, 0, 0));
-	camera.transform.SetPosition(glm::vec3(0.0, 16.0, 0.0)); // diubah-ubah
-	camera.SetCameraDirection(glm::vec3(64.0, 16.0, 0.0)); // diubah-ubah
-	camera.SetCameraUp(glm::vec3(0.0, 1.0, 0.0)); // diubah-ubah
 	//camera.Orbit(100.0);
 
 	// Configurate Shader
@@ -184,9 +251,18 @@ void Demo::BuildObject() {
 
 }
 
+void Demo::BuildCamera() {
+	camera.SetCameraPos(glm::vec3(0, 5, 2));
+	camera.SetCameraFront(glm::vec3(0, 0, 0));
+	camera.transform.SetPosition(glm::vec3(0.0, 16.0, 0.0)); // diubah-ubah
+	camera.SetCameraDirection(glm::vec3(64.0, 16.0, 0.0)); // diubah-ubah
+	camera.SetCameraUp(glm::vec3(0.0, 1.0, 0.0)); // diubah-ubah
+	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
 void Demo::BuildLight() {
 	light.SetShader(this->depthmapShader);
-	light.transform.SetPosition(glm::vec3(0.0f, 10.0f, 0.0f));
+	light.transform.SetPosition(glm::vec3(-2.0f, 4.0f, -1.0f));
 	light.SetLightDir(glm::vec3(0.0f, 0.0f, 0.0f));
 	light.SetLightUp(glm::vec3(0.0, 1.0, 0.0));
 	light.SetFarPlane(7.5f);
@@ -918,8 +994,8 @@ void Demo::BuildTexturedPlane()
 		// format position, tex coords
 		// bottom
 		-100.0f,	-0.5f, -100.0f,  0,  0, 0.0f,  1.0f,  0.0f,
-		100.0f,	-0.5f, -100.0f, 100,  0, 0.0f,  1.0f,  0.0f,
-		100.0f,	-0.5f,  100.0f, 100, 100, 0.0f,  1.0f,  0.0f,
+		100.0f,	   -0.5f, -100.0f, 100,  0, 0.0f,  1.0f,  0.0f,
+		100.0f,	   -0.5f,  100.0f, 100, 100, 0.0f,  1.0f,  0.0f,
 		-100.0f,	-0.5f,  100.0f,  0, 100, 0.0f,  1.0f,  0.0f,
 	};
 
@@ -990,7 +1066,6 @@ void Demo::BuildDepthMap() {
 
 }
 
-
 void Demo::BuildShaders()
 {
 	// build and compile our shader program
@@ -1000,6 +1075,6 @@ void Demo::BuildShaders()
 }
 
 int main(int argc, char** argv) {
-	RenderEngine &app = Demo();
+	RenderEngine& app = Demo();
 	app.Start("Shadow Mapping Demo", 800, 600, false, false);
 }
