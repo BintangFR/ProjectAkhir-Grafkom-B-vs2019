@@ -29,6 +29,7 @@ public:
 	Object3D cube6b;
 	Object3D cube6kr;
 	Object3D cube6kn;
+	Object3D cube6a;
 	Object3D cube7;
 	Object3D cube7d;
 	Object3D cube3up;
@@ -72,6 +73,7 @@ private:
 	void BuildCube6b();
 	void BuildCube6kr();
 	void BuildCube6kn();
+	void BuildCube6a();
 	void BuildCube7();
 	void BuildCube7d();
 	// Build Light
