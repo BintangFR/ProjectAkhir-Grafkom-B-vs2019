@@ -129,5 +129,23 @@
     <Image Include="tembok_a.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="rak1sides.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rakshortup.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rakshortside.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rakshort.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rak1front.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="raksides.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

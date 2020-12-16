@@ -152,6 +152,12 @@
     <Image Include="Kulkasside.png" />
     <Image Include="lainnya ac.png" />
     <Image Include="magazinerack.png" />
+    <Image Include="rak1front.png" />
+    <Image Include="rak1sides.png" />
+    <Image Include="rakshort.png" />
+    <Image Include="rakshortside.png" />
+    <Image Include="rakshortup.png" />
+    <Image Include="raksides.png" />
     <Image Include="Rakup.png" />
     <Image Include="rak_beta.png" />
     <Image Include="tembok_a.png" />

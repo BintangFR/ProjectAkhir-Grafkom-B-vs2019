@@ -11,7 +11,9 @@ Demo::~Demo() {
 
 void Demo::Init() {
 	cube = Object3D();
+	cubesides = Object3D();
 	cube2 = Object3D();
+	cube2sides = Object3D();
 	cubeup = Object3D();
 	cube2up = Object3D();
 	cube3 = Object3D();
@@ -24,6 +26,9 @@ void Demo::Init() {
 	cube6kr = Object3D();
 	cube6kn = Object3D();
 	cube6a = Object3D();
+	cube8 = Object3D();
+	//cubesmallside = Object3D();
+	//cubesmallup = Object3D();
 	cube7 = Object3D();
 	cube7d = Object3D();
 	plane = Object3D();
@@ -31,7 +36,9 @@ void Demo::Init() {
 	BuildDepthMap();
 	BuildCamera();
 	BuildCube();
+	BuildCubesides();
 	BuildCube2();
+	BuildCube2sides();
 	BuildCubeup();
 	BuildCube2up();
 	BuildCube3();
@@ -46,6 +53,7 @@ void Demo::Init() {
 	BuildCube6a();
 	BuildCube7();
 	BuildCube7d();
+	/*BuildCube8();*/
 	BuildPlane();
 	BuildLight();
 	camera.SetDefault(true);
@@ -56,7 +64,9 @@ void Demo::DeInit() {
 	// ------------------------------------------------------------------------
 	plane.DeInit();
 	cube.DeInit();
+	cubesides.DeInit();
 	cube2.DeInit();
+	cube2sides.DeInit();
 	cubeup.DeInit();
 	cube2up.DeInit();
 	cube3.DeInit();
@@ -71,6 +81,9 @@ void Demo::DeInit() {
 	cube6a.DeInit();
 	cube7.DeInit();
 	cube7d.DeInit();
+	/*cubesmallrack.DeInit();*/
+	/*cubesmallside.DeInit();
+	cubesmallup.DeInit();*/
 	glDeleteBuffers(1, &depthMapFBO);
 }
 
@@ -235,8 +248,14 @@ void Demo::BuildObject() {
 	cube.UseShader();
 	cube.Render(depthMap);
 
+	cubesides.UseShader();
+	cubesides.Render(depthMap);
+
 	cube2.UseShader();
 	cube2.Render(depthMap);
+
+	cube2sides.UseShader();
+	cube2sides.Render(depthMap);
 
 	cube3.UseShader();
 	cube3.Render(depthMap);
@@ -280,6 +299,15 @@ void Demo::BuildObject() {
 
 	cube7d.UseShader();
 	cube7d.Render(depthMap);
+
+	/*cubesmallrack.UseShader();
+	cubesmallrack.Render(depthMap);*/
+
+	//cubesmallside.UseShader();
+	//cubesmallside.Render(depthMap);
+
+	//cubesmallup.UseShader();
+	//cubesmallup.Render(depthMap);
 
 }
 
@@ -328,65 +356,185 @@ void Demo::BuildPlane()
 	cube.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-void Demo::BuildCube() //rak jualan 1
+void Demo::BuildCube() // rak jualan 1
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float vertices[] = {
 		// format position, tex coords, normal
 		// front
-		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
-		64.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
-		0.0,  16.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		48.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		48.0,  16.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
 
 		 // right
-		 64.0,  0.0,  8.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
-		 64.0,  0.0, 0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
-		 64.0, 16.0, 0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
-		 64.0, 16.0,  8.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+		 48.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 48.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 48.0, 16.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 48.0, 16.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
 
 		// back
-		0.0, 0.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
-		64.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
-		64.0,   16.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
-		0.0,  16.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		48.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		48.0,   16.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
 
 		 // left
-		 0.0, 0.0, 8.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
-		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
-		 0.0,  16.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
-		 0.0,  16.0, 8.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
 
 		// upper
-		0.0, 16.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
-		64.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
-		64.0, 16.0, 8.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
-		0.0, 16.0, 8.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
+		0.0, 16.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		48.0, 16.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		48.0, 16.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
 
 		// bottom
-		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
-		64.0, 0.0,  8.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
-		0.0, 0.0,  8.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		48.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		48.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
 	};
 
 	unsigned int indices[] = {
-		0,  1,  2,  0,  2,  3,  // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
+		0,  1,  2,  0,  2,  3,   // front
+		/*4,  5,  6,  4,  6,  7, */  // right
+		8,  9,  10, 8,  10, 11 // back
+		/*12, 14, 13, 12, 15, 14,*/  // left
 		/*16, 18, 17, 16, 19, 18,*/  // upper
-		20, 22, 21, 20, 23, 22   // bottom
+		/*20, 22, 21, 20, 23, 22 */  // bottom
 	};
 
 	cube.SetShader(shadowmapShader);
 	cube.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
-	cube.ApplyTexture("rak_beta.png");
+	cube.ApplyTexture("rak1front.png");
 	cube.VerticesDraw(sizeof(indices));
-	cube.transform.SetPosition(glm::vec3(-24.0f, 0.5f, 8.0f));
+	cube.transform.SetPosition(glm::vec3( -8.0f, 0.5f, 8.0f));
 	cube.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
+void Demo::BuildCubesides() // rak jualan 1
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		48.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		48.0,  16.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 48.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 48.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 48.0, 16.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 48.0, 16.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		48.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		48.0,   16.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 16.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		48.0, 16.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		48.0, 16.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		48.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		48.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		/*0,  1,  2,  0,  2,  3,*/   // front
+		4,  5,  6,  4,  6,  7,   // right
+		/*8,  9,  10, 8,  10, 11,*/  // back
+		12, 14, 13, 12, 15, 14,  // left
+		/*16, 18, 17, 16, 19, 18,*/  // upper
+		/*20, 22, 21, 20, 23, 22 */  // bottom
+	};
+
+	cubesides.SetShader(shadowmapShader);
+	cubesides.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+	cubesides.ApplyTexture("rak1sides.png");
+	cubesides.VerticesDraw(sizeof(indices));
+	cubesides.transform.SetPosition(glm::vec3(-8.0f, 0.5f, 8.0f));
+	cubesides.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+//void Demo::BuildCube8() // rak jualan 1
+//{
+//	// set up vertex data (and buffer(s)) and configure vertex attributes
+//	// ------------------------------------------------------------------
+//	float vertices[] = {
+//		// format position, tex coords, normal
+//		// front
+//		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+//		16.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+//		16.0,  8.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+//		0.0,  8.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
+//
+//		 // right
+//		 16.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+//		 16.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+//		 16.0, 8.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+//		 16.0, 8.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+//
+//		// back
+//		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+//		16.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+//		16.0,   8.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+//		0.0,  8.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+//
+//		 // left
+//		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+//		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+//		 0.0,  8.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+//		 0.0,  8.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
+//
+//		// upper
+//		0.0, 8.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+//		16.0, 8.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+//		16.0, 8.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+//		0.0, 8.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
+//
+//		// bottom
+//		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+//		16.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+//		16.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+//		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
+//	};
+//
+//	unsigned int indices[] = {
+//		0,  1,  2,  0,  2,  3,   // front
+//		/*4,  5,  6,  4,  6,  7, */  // right
+//		8,  9,  10, 8,  10, 11 // back
+//		/*12, 14, 13, 12, 15, 14,*/  // left
+//		/*16, 18, 17, 16, 19, 18,*/  // upper
+//		/*20, 22, 21, 20, 23, 22 */  // bottom
+//	};
+//
+//	cubesmallrack.SetShader(shadowmapShader);
+//	cubesmallrack.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+//	cubesmallrack.ApplyTexture("rakshort.png");
+//	cubesmallrack.VerticesDraw(sizeof(indices));
+//	cubesmallrack.transform.SetPosition(glm::vec3(24.0f, 0.5f, 8.0f));
+//	cubesmallrack.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+//}
+
 
 void Demo::BuildCube2() // rak jualan 2
 {
@@ -395,49 +543,49 @@ void Demo::BuildCube2() // rak jualan 2
 	float vertices[] = {
 		// format position, tex coords, normal
 		// front
-		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
-		64.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
-		0.0,  16.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		64.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		64.0,  16.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
 
 		 // right
-		 64.0,  0.0,  8.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
-		 64.0,  0.0, 0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
-		 64.0, 16.0, 0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
-		 64.0, 16.0,  8.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+		 64.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 64.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 64.0, 16.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 64.0, 16.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
 
 		// back
-		0.0, 0.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
-		64.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
-		64.0,   16.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
-		0.0,  16.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		64.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		64.0,   16.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
 
 		 // left
-		 0.0, 0.0, 8.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
-		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
-		 0.0,  16.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
-		 0.0,  16.0, 8.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
 
 		// upper
-		0.0, 16.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
-		64.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
-		64.0, 16.0, 8.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
-		0.0, 16.0, 8.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
+		0.0, 16.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		64.0, 16.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		64.0, 16.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
 
 		// bottom
-		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
-		64.0, 0.0,  8.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
-		0.0, 0.0,  8.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		64.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		64.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
 	};
 
 	unsigned int indices[] = {
 		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
+		/*4,  5,  6,  4,  6,  7,*/   // right
+		8,  9,  10, 8,  10, 11  // back
+		/*12, 14, 13, 12, 15, 14,*/  // left
 		/*16, 18, 17, 16, 19, 18,*/  // upper
-		20, 22, 21, 20, 23, 22   // bottom
+		/*20, 22, 21, 20, 23, 22*/   // bottom
 	};
 
 	cube2.SetShader(shadowmapShader);
@@ -448,6 +596,65 @@ void Demo::BuildCube2() // rak jualan 2
 	cube2.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
+void Demo::BuildCube2sides() // rak jualan 2
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		64.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		64.0,  16.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 64.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 64.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 64.0, 16.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 64.0, 16.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		64.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		64.0,   16.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 16.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		64.0, 16.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		64.0, 16.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		64.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		64.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		/*0,  1,  2,  0,  2,  3, */  // front
+		4,  5,  6,  4,  6,  7,   // right
+		/*8,  9,  10, 8,  10, 11,*/  // back
+		12, 14, 13, 12, 15, 14  // left
+		/*16, 18, 17, 16, 19, 18,*/  // upper
+		/*20, 22, 21, 20, 23, 22  */ // bottom
+	};
+
+	cube2sides.SetShader(shadowmapShader);
+	cube2sides.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+	cube2sides.ApplyTexture("raksides.png");
+	cube2sides.VerticesDraw(sizeof(indices));
+	cube2sides.transform.SetPosition(glm::vec3(-24.0f, 0.5f, -16.0f));
+	cube2sides.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
 void Demo::BuildCubeup() //rak jualan 1
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -456,20 +663,20 @@ void Demo::BuildCubeup() //rak jualan 1
 		// format position, tex coords, normal
 		// front
 		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
-		64.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
+		48.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
+		48.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
 		0.0,  16.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
 
 		 // right
-		 64.0,  0.0,  8.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
-		 64.0,  0.0, 0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
-		 64.0, 16.0, 0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
-		 64.0, 16.0,  8.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+		 48.0,  0.0,  8.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
+		 48.0,  0.0, 0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
+		 48.0, 16.0, 0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
+		 48.0, 16.0,  8.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
 
 		// back
 		0.0, 0.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
-		64.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
-		64.0,   16.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
+		48.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
+		48.0,   16.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
 		0.0,  16.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
 
 		 // left
@@ -480,14 +687,14 @@ void Demo::BuildCubeup() //rak jualan 1
 
 		// upper
 		0.0, 16.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
-		64.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
-		64.0, 16.0, 8.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
+		48.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
+		48.0, 16.0, 8.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
 		0.0, 16.0, 8.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
 
 		// bottom
 		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
-		64.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
-		64.0, 0.0,  8.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
+		48.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
+		48.0, 0.0,  8.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
 		0.0, 0.0,  8.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
 	};
 
@@ -502,9 +709,9 @@ void Demo::BuildCubeup() //rak jualan 1
 
 	cubeup.SetShader(shadowmapShader);
 	cubeup.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
-	cubeup.ApplyTexture("Rakcup.png");
+	cubeup.ApplyTexture("Rakup.png");
 	cubeup.VerticesDraw(sizeof(indices));
-	cubeup.transform.SetPosition(glm::vec3(-24.0f, 0.5f, 8.0f));
+	cubeup.transform.SetPosition(glm::vec3(-8.0f, 0.5f, 8.0f));
 	cubeup.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
@@ -673,12 +880,12 @@ void Demo::BuildCube3up() // kulkas
 	};
 
 	unsigned int indices[] = {
-		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
+		/*0,  1,  2,  0,  2,  3,  */ // front
+		/*4,  5,  6,  4,  6,  7,*/   // right
+		/*8,  9,  10, 8,  10, 11,*/  // back
 		/*12, 14, 13, 12, 15, 14,*/  // left
-		16, 18, 17, 16, 19, 18,// upper
-		20, 22, 21, 20, 23, 22   // bottom
+		16, 18, 17, 16, 19, 18// upper
+		/*20, 22, 21, 20, 23, 22*/   // bottom
 	};
 
 	cube3up.SetShader(shadowmapShader);
