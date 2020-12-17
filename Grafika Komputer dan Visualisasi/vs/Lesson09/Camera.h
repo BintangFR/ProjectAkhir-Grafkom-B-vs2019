@@ -17,14 +17,11 @@ public:
 
 	glm::mat4 projection;
 	glm::mat4 view;
-	glm::vec3 originalPosition;
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
 	glm::vec3 camUp;
 	glm::vec3 camDir;
 	float fovy;
-	GLfloat angle;
-	GLfloat camHeight;
 	Transform transform;
 
 	void SetDefault(bool flag);
