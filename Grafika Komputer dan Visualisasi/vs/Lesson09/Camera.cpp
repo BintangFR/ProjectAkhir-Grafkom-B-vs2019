@@ -1,11 +1,8 @@
 #include "Camera.h"
 
 Camera::Camera() {
-	this->originalPosition = glm::vec3(-2.0f, -1.3f, -2.0f);
 	fovy = 45.0f;
-	camHeight = 5.0f;
 	transform = Transform();
-
 }
 
 Camera::~Camera() {
@@ -20,10 +17,6 @@ void Camera::RenderCamera(GLfloat width, GLfloat height) {
 	// Pass perspective projection matrix
 	if (defaultCamera) {
 		projection = glm::perspective(fovy, width / height, 0.1f, 1000.0f);
-	}
-	else {
-		GLfloat aspect = width / height;
-		projection = glm::ortho(-aspect * camHeight / 2.0f, aspect * camHeight / 2.0f, -camHeight / 2.0f, camHeight / 2.0f, 1000.0f, -1000.0f);
 	}
 
 	glEnable(GL_DEPTH_TEST);
@@ -67,10 +60,6 @@ void Camera::RotateCamera(float speed)
 }
 
 void Camera::Orbit(GLfloat radius) {
-	/*this->angle += angularSpeed;
-	if (this->angle > 360.0f)this->angle -= 360.0f;
-	GLfloat newX = this->originalPosition.x * glm::sin(glm::radians(angle));
-	GLfloat newZ = this->originalPosition.z * glm::cos(glm::radians(angle));*/
 	float camX = sin(glfwGetTime()) * radius;
 	float camZ = cos(glfwGetTime()) * radius;
 	transform.SetPosition(glm::vec3(camX, this->transform.position.y, camZ));
