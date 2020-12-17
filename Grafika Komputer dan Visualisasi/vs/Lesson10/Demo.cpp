@@ -16,7 +16,7 @@ void Demo::Init() {
 	// build and compile our shader program
 	// ------------------------------------
 	shaderProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
-
+	shadowmapShader = BuildShader("multipleLight.vert", "multipleLight.frag", nullptr);
 	BuildCube();
 
 	BuildPlane();

@@ -29,6 +29,7 @@ public:
 	Object3D cube5;
 	Object3D cube6d;
 	Object3D cube6b;
+	Object3D cube6bout;
 	Object3D cube6kr;
 	Object3D cube6kn;
 	Object3D cube6a;

@@ -22,13 +22,14 @@ void Demo::Init() {
 	cube4up = Object3D();
 	cube5 = Object3D();
 	cube6b = Object3D();
+	cube6bout = Object3D();
 	cube6d = Object3D();
 	cube6kr = Object3D();
 	cube6kn = Object3D();
 	cube6a = Object3D();
 	cube8 = Object3D();
-	//cubesmallside = Object3D();
-	//cubesmallup = Object3D();
+	cube8side = Object3D();
+	cube8up = Object3D();
 	cube7 = Object3D();
 	cube7d = Object3D();
 	plane = Object3D();
@@ -47,6 +48,7 @@ void Demo::Init() {
 	BuildCube4up();
 	BuildCube5();
 	BuildCube6b();
+	BuildCube6bout();
 	BuildCube6d();
 	BuildCube6kr();
 	BuildCube6kn();
@@ -54,6 +56,8 @@ void Demo::Init() {
 	BuildCube7();
 	BuildCube7d();
 	BuildCube8();
+	BuildCube8side();
+	BuildCube8up();
 	BuildPlane();
 	BuildLight();
 	camera.SetDefault(true);
@@ -75,15 +79,16 @@ void Demo::DeInit() {
 	cube4up.DeInit();
 	cube5.DeInit();
 	cube6b.DeInit();
+	cube6bout.DeInit();
 	cube6d.DeInit();
 	cube6kr.DeInit();
 	cube6kn.DeInit();
 	cube6a.DeInit();
 	cube7.DeInit();
 	cube7d.DeInit();
-	/*cubesmallrack.DeInit();*/
-	/*cubesmallside.DeInit();
-	cubesmallup.DeInit();*/
+	cube8.DeInit();
+	cube8side.DeInit();
+	cube8up.DeInit();
 	glDeleteBuffers(1, &depthMapFBO);
 }
 
@@ -143,8 +148,57 @@ void Demo::Render() {
 
 	BuildObject();
 
-	glDisable(GL_DEPTH_TEST);
+	glm::vec3 cameraPos = glm::vec3(0, -40, 0);
+	glm::vec3 cameraFront = glm::vec3(0, 0, 0);
 
+	/*GLint viewPosLoc = glGetUniformLocation(this->shadowmapShader, "viewPos");
+	glUniform3f(viewPosLoc, cameraPos.x, cameraPos.y, cameraPos.z);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "dirLight.direction"), 0.0f, 40.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "dirLight.ambient"), 10.0f, 10.0f, 10.0f);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "dirLight.diffuse"), 11.0f, 10.0f, 10.0f);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "dirLight.specular"), 10.1f, 10.1f, 10.1f);*/
+
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].position"), 0.0f, 40.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].ambient"), 1.0f, 0.0f, 1.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].diffuse"), 1.0f, 0.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].specular"), 1.0f, 0.0f, 0.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].constant"), 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].linear"), 0.09f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[0].quadratic"), 0.032f);
+
+	//// point light 2
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].position"), 0.0f, 40.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].ambient"), 0.0f, 1.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].diffuse"), 0.0f, 1.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].specular"), 0.0f, 1.0f, 0.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].constant"), 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].linear"), 0.09f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[1].quadratic"), 0.032f);
+	//// point light 3
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].position"), 0.0f, 40.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].ambient"), 0.0f, 0.0f, 1.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].diffuse"), 0.0f, 0.0f, 1.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].specular"), 0.0f, 0.0f, 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].constant"), 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].linear"), 0.09f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[2].quadratic"), 0.032f);
+	//// point light 4
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].position"), 0.0f, 40.0f, 0.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].ambient"), 0.0f, 1.0f, 1.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].diffuse"), 0.0f, 1.0f, 1.0f);
+	//glUniform3f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].specular"), 0.0f, 1.0f, 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].constant"), 1.0f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].linear"), 0.09f);
+	//glUniform1f(glGetUniformLocation(this->shadowmapShader, "pointLights[3].quadratic"), 0.032f);
+	// spotLight
+	/*glUniform3f(glGetUniformLocation(this->shadowmapShader, "spotLight.ambient"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "spotLight.diffuse"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "spotLight.specular"), 1.0f, 0.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->shadowmapShader, "spotLight.constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shadowmapShader, "spotLight.linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shadowmapShader, "spotLight.quadratic"), 0.032f);
+	glUniform1f(glGetUniformLocation(this->shadowmapShader, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
+	glUniform1f(glGetUniformLocation(this->shadowmapShader, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));*/
 	// Step 1 Render depth of scene to texture
 	// ----------------------------------------
 	/*glm::mat4 lightProjection, lightView;
@@ -282,6 +336,9 @@ void Demo::BuildObject() {
 	cube6b.UseShader();
 	cube6b.Render(depthMap);
 
+	cube6bout.UseShader();
+	cube6bout.Render(depthMap);
+
 	cube6d.UseShader();
 	cube6d.Render(depthMap);
 
@@ -300,14 +357,18 @@ void Demo::BuildObject() {
 	cube7d.UseShader();
 	cube7d.Render(depthMap);
 
-	/*cubesmallrack.UseShader();
-	cubesmallrack.Render(depthMap);*/
+	cube7d.UseShader();
+	cube7d.Render(depthMap);
 
-	//cubesmallside.UseShader();
-	//cubesmallside.Render(depthMap);
+	cube8.UseShader();
+	cube8.Render(depthMap);
 
-	//cubesmallup.UseShader();
-	//cubesmallup.Render(depthMap);
+	cube8side.UseShader();
+	cube8side.Render(depthMap);
+
+	cube8up.UseShader();
+	cube8up.Render(depthMap);
+
 
 }
 
@@ -322,7 +383,7 @@ void Demo::BuildCamera() {
 
 void Demo::BuildLight() {
 	light.SetShader(this->depthmapShader);
-	light.transform.SetPosition(glm::vec3(-2.0f, 4.0f, -1.0f));
+	light.transform.SetPosition(glm::vec3(0.0f, 39.0f, 0.0f));
 	light.SetLightDir(glm::vec3(0.0f, 0.0f, 0.0f));
 	light.SetLightUp(glm::vec3(0.0, 1.0, 0.0));
 	light.SetFarPlane(7.5f);
@@ -531,8 +592,128 @@ void Demo::BuildCube8() // rak jualan 1
 	cube8.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
 	cube8.ApplyTexture("rakshort.png");
 	cube8.VerticesDraw(sizeof(indices));
-	cube8.transform.SetPosition(glm::vec3(24.0f, 0.5f, 8.0f));
+	cube8.transform.SetPosition(glm::vec3(-24.0f, 0.5f, 8.0f));
 	cube8.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void Demo::BuildCube8side() // rak jualan 1
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		16.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		16.0,  8.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  8.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 16.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 16.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 16.0, 8.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 16.0, 8.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		16.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		16.0,   8.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  8.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  8.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  8.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 8.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		16.0, 8.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		16.0, 8.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 8.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		16.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		16.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		/*0,  1,  2,  0,  2,  3,*/   // front
+		4,  5,  6,  4,  6,  7,   // right
+		/*8,  9,  10, 8,  10, 11*/ // back
+		12, 14, 13, 12, 15, 14  // left
+		/*16, 18, 17, 16, 19, 18,*/  // upper
+		/*20, 22, 21, 20, 23, 22 */  // bottom
+	};
+
+	cube8side.SetShader(shadowmapShader);
+	cube8side.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+	cube8side.ApplyTexture("rakshortside.png");
+	cube8side.VerticesDraw(sizeof(indices));
+	cube8side.transform.SetPosition(glm::vec3(-24.0f, 0.5f, 8.0f));
+	cube8side.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void Demo::BuildCube8up() // rak jualan 1
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  0.0f,  1.0f, // 0
+		16.0, 0.0, 0.0, 0, 1,  0.0f,  0.0f,  1.0f, // 1
+		16.0,  8.0, 0.0, 0, 0,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  8.0, 0.0, 1, 0, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 16.0,  0.0,  8.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 16.0,  0.0, 0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 16.0, 8.0, 0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 16.0, 8.0,  8.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		16.0,  0.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		16.0,   8.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  8.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 8.0, 1, 1, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  8.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  8.0, 8.0, 1, 0, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 8.0,  0.0, 1, 1,   0.0f,  1.0f,  0.0f, // 16
+		16.0, 8.0, 0.0, 0, 1,   0.0f,  1.0f,  0.0f, // 17
+		16.0, 8.0, 8.0, 0, 0,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 8.0, 8.0, 1, 0,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 1, 1, 0.0f,  -1.0f,  0.0f, // 20
+		16.0, 0.0, 0.0, 0, 1,  0.0f,  -1.0f,  0.0f, // 21
+		16.0, 0.0,  8.0, 0, 0,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  8.0, 1, 0, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		/*0,  1,  2,  0,  2,  3,*/   // front
+		/*4,  5,  6,  4,  6,  7,*/   // right
+		/*8,  9,  10, 8,  10, 11*/ // back
+		/*12, 14, 13, 12, 15, 14 */ // left
+		16, 18, 17, 16, 19, 18 // upper
+		/*20, 22, 21, 20, 23, 22 */  // bottom
+	};
+
+	cube8up.SetShader(shadowmapShader);
+	cube8up.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+	cube8up.ApplyTexture("rakshortup.png");
+	cube8up.VerticesDraw(sizeof(indices));
+	cube8up.transform.SetPosition(glm::vec3(-24.0f, 0.5f, 8.0f));
+	cube8up.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
 
@@ -1160,10 +1341,10 @@ void Demo::BuildCube6b() //ruangannya jadi d
 		 128.0, 40.0,  0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
 
 		// back
-		0.0, 0.0, 64.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
-		128.0,  0.0, 64.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
-		128.0,   40.0, 64.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
-		0.0,  40.0, 64.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+		0.0, 0.0, 64.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		128.0,  0.0, 64.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		128.0,   40.0, 64.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  40.0, 64.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
 
 		 // left
 		 0.0, 0.0, 64.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
@@ -1201,6 +1382,68 @@ void Demo::BuildCube6b() //ruangannya jadi d
 	cube6b.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6b.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6b.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void Demo::BuildCube6bout() //ruangannya jadi d
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
+		128.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
+		128.0,  40.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  40.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 128.0,  0.0,  0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
+		 128.0,  0.0, 64.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
+		 128.0, 40.0, 64.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
+		 128.0, 40.0,  0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 64.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 8 
+		128.0,  0.0, 64.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 9
+		128.0,   40.0, 64.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  40.0, 64.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 64.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  40.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  40.0, 64.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 40.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
+		128.0, 40.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
+		128.0, 40.0, 64.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 40.0, 64.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
+		128.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
+		128.0, 0.0,  64.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  64.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		//0,  1,  2,  0,  2,  3,   // front
+		//4,  5,  6,  4,  6,  7,   // right
+		8,  9,  10, 8,  10, 11,  // back
+		//12, 14, 13, 12, 15, 14,  // left
+		//16, 18, 17, 16, 19, 18,  // upper
+		//20, 22, 21, 20, 23, 22   // bottom
+	};
+
+	cube6bout.SetShader(shadowmapShader);
+	cube6bout.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	cube6bout.ApplyTexture("tembok_dx.png");
+	cube6bout.VerticesDraw(sizeof(indices));
+	cube6bout.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
+	cube6bout.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -31.9f));
+	cube6bout.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
 void Demo::BuildCube6kr() //ruangannya
@@ -1258,7 +1501,7 @@ void Demo::BuildCube6kr() //ruangannya
 	cube6kr.SetShader(shadowmapShader);
 	cube6kr.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
 
-	cube6kr.ApplyTexture("tembok_kr.png");
+	cube6kr.ApplyTexture("tembok_kn.png");
 	cube6kr.VerticesDraw(sizeof(indices));
 	cube6kr.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6kr.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
