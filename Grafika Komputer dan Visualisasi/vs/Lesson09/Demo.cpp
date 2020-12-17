@@ -29,6 +29,8 @@ void Demo::Init() {
 	cube6a = Object3D();
 	cube8 = Object3D();
 	cube8side = Object3D();
+	cube9 = Object3D();
+	cube9side = Object3D();
 	cube8up = Object3D();
 	cube7 = Object3D();
 	cube7d = Object3D();
@@ -57,6 +59,8 @@ void Demo::Init() {
 	BuildCube7d();
 	BuildCube8();
 	BuildCube8side();
+	BuildCube9();
+	BuildCube9side();
 	BuildCube8up();
 	BuildPlane();
 	BuildLight();
@@ -89,6 +93,8 @@ void Demo::DeInit() {
 	cube8.DeInit();
 	cube8side.DeInit();
 	cube8up.DeInit();
+	cube9.DeInit();
+	cube9side.DeInit();
 	glDeleteBuffers(1, &depthMapFBO);
 }
 
@@ -368,6 +374,12 @@ void Demo::BuildObject() {
 
 	cube8up.UseShader();
 	cube8up.Render(depthMap);
+
+	cube9.UseShader();
+	cube9.Render(depthMap);
+
+	cube9side.UseShader();
+	cube9side.Render(depthMap);
 
 
 }
@@ -1754,6 +1766,130 @@ void Demo::BuildCube7d() //ac 1 depan
 	cube7d.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube7d.transform.SetPosition(glm::vec3(0.0f, 32.0f, -32.0f));
 	cube7d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void Demo::BuildCube9() //ruangannya
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
+		2.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
+		2.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 2.0,  0.0,  0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 4
+		 2.0,  0.0, 32.0, 0, 1, 1.0f,  0.0f,  0.0f, // 5
+		 2.0, 16.0, 32.0, 0, 0, 1.0f,  0.0f,  0.0f, // 6
+		 2.0, 16.0,  0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 32.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
+		2.0,  0.0, 32.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
+		2.0,   16.0, 32.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 32.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 32.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 32.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 16.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
+		2.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
+		2.0, 16.0, 32.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 32.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
+		2.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
+		2.0, 0.0,  32.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  32.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		/*0,  1,  2,  0,  2,  3, */  // front
+		4,  5,  6,  4,  6,  7   // right
+		//8,  9,  10, 8,  10, 11,  // back
+		//12, 14, 13, 12, 15, 14,  // left
+		//16, 18, 17, 16, 19, 18,  // upper
+		//20, 22, 21, 20, 23, 22   // bottom
+	};
+
+	cube9.SetShader(shadowmapShader);
+	cube9.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	cube9.ApplyTexture("rakrokok.png");
+	cube9.VerticesDraw(sizeof(indices));
+	cube9.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
+	cube9.transform.SetPosition(glm::vec3(-56.0f, 0.0f, 0.0f));
+	cube9.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void Demo::BuildCube9side() //ruangannya
+{
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	float vertices[] = {
+		// format position, tex coords, normal
+		// front
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  0.0f,  1.0f, // 0
+		2.0, 0.0, 0.0, 1, 0,  0.0f,  0.0f,  1.0f, // 1
+		2.0,  16.0, 0.0, 1, 1,  0.0f,  0.0f,  1.0f, // 2
+		0.0,  16.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
+
+		 // right
+		 2.0,  0.0,  0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
+		 2.0,  0.0, 32.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
+		 2.0, 16.0, 32.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
+		 2.0, 16.0,  0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+
+		// back
+		0.0, 0.0, 32.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
+		2.0,  0.0, 32.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
+		2.0,   16.0, 32.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
+		0.0,  16.0, 32.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+
+		 // left
+		 0.0, 0.0, 32.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
+		 0.0,  16.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
+		 0.0,  16.0, 32.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+
+		// upper
+		0.0, 16.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
+		2.0, 16.0, 0.0, 1, 0,   0.0f,  1.0f,  0.0f, // 17
+		2.0, 16.0, 32.0, 1, 1,  0.0f,  1.0f,  0.0f, // 18
+		0.0, 16.0, 32.0, 0, 1,   0.0f,  1.0f,  0.0f, // 19
+
+		// bottom
+		0.0, 0.0, 0.0, 0, 0, 0.0f,  -1.0f,  0.0f, // 20
+		2.0, 0.0, 0.0, 1, 0,  0.0f,  -1.0f,  0.0f, // 21
+		2.0, 0.0,  32.0, 1, 1,  0.0f,  -1.0f,  0.0f, // 22
+		0.0, 0.0,  32.0, 0, 1, 0.0f,  -1.0f,  0.0f, // 23
+	};
+
+	unsigned int indices[] = {
+		0,  1,  2,  0,  2,  3,   // front
+		/*4,  5,  6,  4,  6,  7, */  // right
+		8,  9,  10, 8,  10, 11,  // back
+		/*12, 14, 13, 12, 15, 14,*/  // left
+		16, 18, 17, 16, 19, 18,  // upper
+		20, 22, 21, 20, 23, 22   // bottom
+	};
+
+	cube9side.SetShader(shadowmapShader);
+	cube9side.BuildObject(vertices, sizeof(vertices), indices, sizeof(indices));
+
+	cube9side.ApplyTexture("Kulkasside.png");
+	cube9side.VerticesDraw(sizeof(indices));
+	cube9side.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
+	cube9side.transform.SetPosition(glm::vec3(-56.0f, 0.0f, 0.0f));
+	cube9side.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
 void Demo::ApplyTexture(const char* _texturePath)

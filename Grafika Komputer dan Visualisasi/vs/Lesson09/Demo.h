@@ -39,6 +39,8 @@ public:
 	Object3D cube8;
 	Object3D cube8side;
 	Object3D cube8up;
+	Object3D cube9;
+	Object3D cube9side;
 	Object3D plane;
 private:
 	GLuint depthmapShader, shadowmapShader, texture_id, plane_texture, stexture, stexture2, depthMapFBO, depthMap;
@@ -82,16 +84,14 @@ private:
 	void BuildCube6kr();
 	void BuildCube6kn();
 	void BuildCube6a();
-	void BuildCube6dout();
 	void BuildCube6bout();
-	void BuildCube6krout();
-	void BuildCube6knout();
-	void BuildCube6aout();
 	void BuildCube7();
 	void BuildCube7d();
 	void BuildCube8();
 	void BuildCube8side();
 	void BuildCube8up();
+	void BuildCube9();
+	void BuildCube9side();
 	// Build Light
 	void BuildLight();
 };
