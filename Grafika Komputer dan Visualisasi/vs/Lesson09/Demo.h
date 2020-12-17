@@ -92,6 +92,8 @@ private:
 	void BuildCube8up();
 	void BuildCube9();
 	void BuildCube9side();
+	void BuildCube10();
+	void BuildCube10side();
 	// Build Light
 	void BuildLight();
 };
