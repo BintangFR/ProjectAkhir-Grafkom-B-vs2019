@@ -19,7 +19,6 @@ public:
 
 	Transform transform;
 
-	void CreateObject(const char* vertexPath, const char* fragmentPath);
 	void BuildObject(float* _vertices, size_t verticesSize, unsigned int* _indices, size_t indicesSize);
 	GLuint GetVAO();
 	GLuint GetVBO();
@@ -28,7 +27,6 @@ public:
 	void SetShader(GLuint shader);
 	void VerticesDraw(int verticesDraw);
 	void Render(GLuint depthMap);
-	void RenderLight(GLuint shader);
 	void ApplyTexture(const char* _texturePath);
 	void DeInit();
 	void UseShader();

@@ -27,8 +27,6 @@ public:
 	void SetDefault(bool flag);
 	void RenderCamera(GLfloat width, GLfloat height);
 
-	void SetCameraPos(glm::vec3 pos);
-	void SetCameraFront(glm::vec3 front);
 
 	void Orbit(GLfloat angularSpeed);
 

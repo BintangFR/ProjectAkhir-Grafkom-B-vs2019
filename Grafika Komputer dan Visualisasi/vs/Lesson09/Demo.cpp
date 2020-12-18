@@ -385,8 +385,6 @@ void Demo::BuildObject() {
 }
 
 void Demo::BuildCamera() {
-	camera.SetCameraPos(glm::vec3(0, 5, 2));
-	camera.SetCameraFront(glm::vec3(0, 0, 0));
 	camera.transform.SetPosition(glm::vec3(0.0, 16.0, 0.0)); // diubah-ubah
 	camera.SetCameraDirection(glm::vec3(64.0, 16.0, 0.0)); // diubah-ubah
 	camera.SetCameraUp(glm::vec3(0.0, 1.0, 0.0)); // diubah-ubah
@@ -426,7 +424,6 @@ void Demo::BuildPlane()
 
 	plane.ApplyTexture("Floor.png");
 	plane.VerticesDraw(sizeof(indices));
-	cube.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 void Demo::BuildCube() // rak jualan 1
@@ -1330,7 +1327,6 @@ void Demo::BuildCube6d() //ruangannya jadi b
 
 	cube6d.ApplyTexture("tembok_b.png");
 	cube6d.VerticesDraw(sizeof(indices));
-	cube6d.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6d.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1392,7 +1388,6 @@ void Demo::BuildCube6b() //ruangannya jadi d
 
 	cube6b.ApplyTexture("tembok_d.png");
 	cube6b.VerticesDraw(sizeof(indices));
-	cube6b.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6b.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6b.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1454,7 +1449,6 @@ void Demo::BuildCube6bout() //ruangannya jadi d
 
 	cube6bout.ApplyTexture("tembok_dx.png");
 	cube6bout.VerticesDraw(sizeof(indices));
-	cube6bout.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6bout.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -31.9f));
 	cube6bout.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1516,7 +1510,6 @@ void Demo::BuildCube6kr() //ruangannya
 
 	cube6kr.ApplyTexture("tembok_kn.png");
 	cube6kr.VerticesDraw(sizeof(indices));
-	cube6kr.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6kr.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6kr.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1578,7 +1571,6 @@ void Demo::BuildCube6kn() //ruangannya
 
 	cube6kn.ApplyTexture("tembok_kn.png");
 	cube6kn.VerticesDraw(sizeof(indices));
-	cube6kn.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6kn.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6kn.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1640,7 +1632,6 @@ void Demo::BuildCube6a() //ruangannya
 
 	cube6a.ApplyTexture("tembok_a.png");
 	cube6a.VerticesDraw(sizeof(indices));
-	cube6a.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube6a.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 	cube6a.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1702,7 +1693,6 @@ void Demo::BuildCube7() //ac 1 kecuali depan
 
 	cube7.ApplyTexture("lainnya ac.png");
 	cube7.VerticesDraw(sizeof(indices));
-	cube7.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube7.transform.SetPosition(glm::vec3(0.0f, 32.0f, -32.0f));
 	cube7.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1764,7 +1754,6 @@ void Demo::BuildCube7d() //ac 1 depan
 
 	cube7d.ApplyTexture("ac depan.png");
 	cube7d.VerticesDraw(sizeof(indices));
-	cube7d.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube7d.transform.SetPosition(glm::vec3(0.0f, 32.0f, -32.0f));
 	cube7d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1826,7 +1815,6 @@ void Demo::BuildCube9() //ruangannya
 
 	cube9.ApplyTexture("rakrokok.png");
 	cube9.VerticesDraw(sizeof(indices));
-	cube9.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube9.transform.SetPosition(glm::vec3(-56.0f, 0.0f, 0.0f));
 	cube9.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1888,7 +1876,6 @@ void Demo::BuildCube9side() //ruangannya
 
 	cube9side.ApplyTexture("Kulkasside.png");
 	cube9side.VerticesDraw(sizeof(indices));
-	cube9side.transform.SetOrigin(glm::vec3(0.0f, 0.0f, 0.0f));
 	cube9side.transform.SetPosition(glm::vec3(-56.0f, 0.0f, 0.0f));
 	cube9side.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
@@ -1955,144 +1942,6 @@ void Demo::BuildCube9side() //ruangannya
 //	cube6d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 //}
 
-void Demo::ApplyTexture(const char* _texturePath)
-{
-	// load image into texture memory
-	// ------------------------------
-	// Load and create a texture 
-	glGenTextures(1, &texture_id);
-	glBindTexture(GL_TEXTURE_2D, texture_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void Demo::BuildObject(float* _vertices, size_t verticesSize, unsigned int* _indices, size_t indicesSize)
-{
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, verticesSize, _vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, _indices, GL_STATIC_DRAW);
-
-	// define position pointer layout 0
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(0 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(0);
-
-	// define texcoord pointer layout 1
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-
-	// define normal pointer layout 2
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
-
-	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-	glBindVertexArray(0);
-
-	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
-
-void Demo::DrawTexturedCube(GLuint shader)
-{
-	this->shader.UseShader(shader);
-	glBindVertexArray(VAO);
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, 0.5f, 0));
-
-	GLint modelLoc = glGetUniformLocation(shader, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
-}
-
-void Demo::BuildTexturedPlane()
-{
-	// Load and create a texture 
-	glGenTextures(1, &plane_texture);
-	glBindTexture(GL_TEXTURE_2D, plane_texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int width, height;
-	unsigned char* image = SOIL_load_image("Floor.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-
-	// Build geometry
-	GLfloat vertices[] = {
-		// format position, tex coords
-		// bottom
-		-100.0f,	-0.5f, -100.0f,  0,  0, 0.0f,  1.0f,  0.0f,
-		100.0f,	   -0.5f, -100.0f, 100,  0, 0.0f,  1.0f,  0.0f,
-		100.0f,	   -0.5f,  100.0f, 100, 100, 0.0f,  1.0f,  0.0f,
-		-100.0f,	-0.5f,  100.0f,  0, 100, 0.0f,  1.0f,  0.0f,
-	};
-
-	GLuint indices[] = { 0,  2,  1,  0,  3,  2 };
-
-	glGenVertexArrays(1, &planeVAO);
-	glGenBuffers(1, &planeVBO);
-	glGenBuffers(1, &planeEBO);
-
-	glBindVertexArray(planeVAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, planeEBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), 0);
-	glEnableVertexAttribArray(0);
-	// TexCoord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-	// Normal attribute
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
-
-	glBindVertexArray(0); // Unbind VAO
-}
-
-void Demo::DrawTexturedPlane(GLuint shader)
-{
-	this->shader.UseShader(shader);
-	glBindVertexArray(planeVAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
-	glm::mat4 model;
-	GLint modelLoc = glGetUniformLocation(shader, "model");
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
-}
 
 void Demo::BuildDepthMap() {
 	// configure depth map FBO

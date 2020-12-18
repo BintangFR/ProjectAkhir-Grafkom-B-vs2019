@@ -21,9 +21,6 @@ void Transform::Scale(glm::vec3 scale) {
 	this->scale = scale;
 }
 
-void Transform::SetOrigin(glm::vec3 origin) {
-	this->origin = origin;
-}
 
 void Transform::SetPosition(glm::vec3 newPosition) {
 	position = newPosition;

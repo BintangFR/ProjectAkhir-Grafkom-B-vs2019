@@ -69,13 +69,7 @@ void Camera::Zoom(GLfloat value) {
 	this->fovy += value;
 }
 
-void Camera::SetCameraFront(glm::vec3 front) {
-	cameraFront = front;
-}
 
-void Camera::SetCameraPos(glm::vec3 pos) {
-	cameraPos = pos;
-}
 
 void Camera::SetCameraDirection(glm::vec3 camDir) {
 	this->camDir = camDir;

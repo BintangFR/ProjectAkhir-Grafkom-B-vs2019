@@ -16,9 +16,6 @@ void Object3D::DeInit() {
 	glDeleteBuffers(1, &EBO);
 }
 
-void Object3D::CreateObject(const char* vertexPath, const char* fragmentPath) {
-	shader.BuildShader(vertexPath, fragmentPath);
-}
 
 void Object3D::BuildObject(float* _vertices, size_t verticesSize, unsigned int* _indices, size_t indicesSize)
 {
@@ -93,18 +90,7 @@ void Object3D::Render(GLuint depthMap) {
 	glBindVertexArray(0);
 }
 
-void Object3D::RenderLight(GLuint shaderProgram) {
-	this->shader.UseShader(shaderProgram);
 
-	glBindVertexArray(VAO);
-
-	transform.Execute(shader);
-
-	glDrawElements(GL_TRIANGLES, verticesDraw, GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
-}
 
 void Object3D::SetShader(GLuint shader) {
 	this->shader.SetShader(shader);
