@@ -488,6 +488,7 @@ void Demo::BuildCube() // rak jualan 1
 	cube.transform.SetPosition(glm::vec3( -8.0f, 0.5f, 8.0f));
 	cube.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
+
 void Demo::BuildCubesides() // rak jualan 1
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -728,7 +729,6 @@ void Demo::BuildCube8up() // rak jualan 1
 	cube8up.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
-
 void Demo::BuildCube2() // rak jualan 2
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -848,6 +848,7 @@ void Demo::BuildCube2sides() // rak jualan 2
 	cube2sides.transform.SetPosition(glm::vec3(-24.0f, 0.5f, -16.0f));
 	cube2sides.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 }
+
 void Demo::BuildCubeup() //rak jualan 1
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -1483,10 +1484,10 @@ void Demo::BuildCube6kr() //ruangannya
 		0.0,  40.0, 64.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
 
 		 // left
-		 0.0, 0.0, 64.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
-		 0.0, 0.0,  0.0, 1, 0, -1.0f,  0.0f,  0.0f, // 13
-		 0.0,  40.0,  0.0, 1, 1, -1.0f,  0.0f,  0.0f, // 14
-		 0.0,  40.0, 64.0, 0, 1, -1.0f,  0.0f,  0.0f, // 15
+		 0.0, 0.0, 64.0, 0, 0, 1.0f,  0.0f,  0.0f, // 12
+		 0.0, 0.0,  0.0, 1, 0, 1.0f,  0.0f,  0.0f, // 13
+		 0.0,  40.0,  0.0, 1, 1, 1.0f,  0.0f,  0.0f, // 14
+		 0.0,  40.0, 64.0, 0, 1, 1.0f,  0.0f,  0.0f, // 15
 
 		// upper
 		0.0, 40.0,  0.0, 0, 0,   0.0f,  1.0f,  0.0f, // 16
@@ -1533,10 +1534,10 @@ void Demo::BuildCube6kn() //ruangannya
 		0.0,  40.0, 0.0, 0, 1, 0.0f,  0.0f,  1.0f, // 3
 
 		 // right
-		 128.0,  0.0,  0.0, 0, 0, 1.0f,  0.0f,  0.0f, // 4
-		 128.0,  0.0, 64.0, 1, 0, 1.0f,  0.0f,  0.0f, // 5
-		 128.0, 40.0, 64.0, 1, 1, 1.0f,  0.0f,  0.0f, // 6
-		 128.0, 40.0,  0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
+		 128.0,  0.0,  0.0, 0, 0, -1.0f,  0.0f,  0.0f, // 4
+		 128.0,  0.0, 64.0, 1, 0, -1.0f,  0.0f,  0.0f, // 5
+		 128.0, 40.0, 64.0, 1, 1, -1.0f,  0.0f,  0.0f, // 6
+		 128.0, 40.0,  0.0, 0, 1, -1.0f,  0.0f,  0.0f, // 7
 
 		// back
 		0.0, 0.0, 64.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
@@ -1725,10 +1726,10 @@ void Demo::BuildCube7d() //ac 1 depan
 		 24.0, 8.0,  0.0, 0, 1, 1.0f,  0.0f,  0.0f, // 7
 
 		// back
-		0.0, 0.0, 8.0, 0, 0, 0.0f,  0.0f,  -1.0f, // 8 
-		24.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  -1.0f, // 9
-		24.0,   8.0, 8.0, 1, 1, 0.0f,  0.0f,  -1.0f, // 10
-		0.0,  8.0, 8.0, 0, 1, 0.0f,  0.0f,  -1.0f, // 11
+		0.0, 0.0, 8.0, 0, 0, 0.0f,  0.0f,  1.0f, // 8 
+		24.0,  0.0, 8.0, 1, 0, 0.0f,  0.0f,  1.0f, // 9
+		24.0,   8.0, 8.0, 1, 1, 0.0f,  0.0f,  1.0f, // 10
+		0.0,  8.0, 8.0, 0, 1, 0.0f,  0.0f,  1.0f, // 11
 
 		 // left
 		 0.0, 0.0, 8.0, 0, 0, -1.0f,  0.0f,  0.0f, // 12
@@ -1953,7 +1954,6 @@ void Demo::BuildCube9side() //ruangannya
 //	cube6d.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 //	cube6d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 //}
-
 
 void Demo::ApplyTexture(const char* _texturePath)
 {
