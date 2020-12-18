@@ -100,6 +100,7 @@ void Demo::DeInit() {
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
+
 void Demo::ProcessInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
@@ -1941,7 +1942,6 @@ void Demo::BuildCube9side() //ruangannya
 //	cube6d.transform.SetPosition(glm::vec3(-56.0f, 0.0f, -32.0f));
 //	cube6d.transform.Scale(glm::vec3(1.0f, 1.0f, 1.0f));
 //}
-
 
 void Demo::BuildDepthMap() {
 	// configure depth map FBO
